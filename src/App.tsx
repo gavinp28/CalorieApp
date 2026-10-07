@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { applyBrand, initialBrand, type BrandId } from './brand';
 import { AppShell } from './components/AppShell';
-import { ModeTabs } from './components/ModeTabs';
 import { useTheme } from './lib/theme';
 import { ComingSoon } from './pages/ComingSoon';
-import { DailyFoodPage } from './pages/DailyFoodPage';
+import { DailyPage } from './pages/DailyPage';
 
-// The identity picker shows while the visual direction is undecided.
-const SHOW_BRAND_PICKER = true;
+// Direction A is chosen for now. The others stay previewable with ?brand=basil / ?brand=neon.
+const SHOW_BRAND_PICKER = new URLSearchParams(location.search).has('brand');
 
 export function App() {
   const [brand, setBrand] = useState<BrandId>(initialBrand);
@@ -20,18 +19,8 @@ export function App() {
     <BrowserRouter>
       <AppShell brand={brand} onBrand={setBrand} theme={theme} showBrandPicker={SHOW_BRAND_PICKER}>
         <Routes>
-          <Route path="/" element={<DailyFoodPage />} />
-          <Route
-            path="/plate"
-            element={
-              <>
-                <ModeTabs />
-                <ComingSoon emoji="🍽️" title="Full plate" phase={2}>
-                  Guess the total for a whole plate, then watch each food's calories revealed one by one.
-                </ComingSoon>
-              </>
-            }
-          />
+          <Route path="/" element={<DailyPage mode="food" />} />
+          <Route path="/plate" element={<DailyPage mode="plate" />} />
           <Route path="/endless" element={<ComingSoon emoji="♾️" title="Endless" phase={5}>Which has more calories? Three lives, unlimited rounds.</ComingSoon>} />
           <Route path="/archive" element={<ComingSoon emoji="🗂️" title="Archive" phase={3}>Every past puzzle in both modes, plus 40 bonus puzzles each.</ComingSoon>} />
           <Route path="/stats" element={<ComingSoon emoji="📊" title="Stats" phase={3}>Played, win %, streaks and your guess distribution.</ComingSoon>} />
