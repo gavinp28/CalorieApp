@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { signToken } from '../../shared/token';
-import { handlePuzzle } from './puzzle';
+import { handlePuzzle } from '../functions/puzzle';
 
 const SECRET = 'puzzle-test-secret-0123456789abcdef';
 const noon = Date.UTC(2026, 9, 7, 12); // players are on #54 or #55

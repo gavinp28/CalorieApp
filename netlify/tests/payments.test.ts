@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { signToken, verifyToken } from '../../shared/token';
 import type { CheckoutSession } from '../lib/stripe';
-import { handleRestoreEmail } from './restore-email';
-import { handleRestoreLink } from './restore-link';
-import { handleUnlock } from './unlock';
+import { handleRestoreEmail } from '../functions/restore-email';
+import { handleRestoreLink } from '../functions/restore-link';
+import { handleUnlock } from '../functions/unlock';
 
 const SECRET = 'payments-test-secret-0123456789abcdef';
 const SID = 'cs_test_a1B2c3D4e5F6g7H8';
@@ -107,7 +107,7 @@ describe('POST /api/unlock', () => {
 
   it('reports missing configuration as misconfigured, not a crash', async () => {
     delete process.env.STRIPE_SECRET_KEY;
-    const { default: handler } = await import('./unlock');
+    const { default: handler } = await import('../functions/unlock');
     const res = await handler(post('/api/unlock', { session_id: SID }));
     expect(res.status).toBe(500);
     expect(await res.json()).toEqual({ error: 'misconfigured' });

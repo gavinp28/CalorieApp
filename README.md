@@ -62,7 +62,8 @@ first load by `src/lib/migrate.ts`. The prototype's unlock code is not carried o
 
 ```
 shared/              Pure logic used by client and functions (dates, grading, types) + tests
-netlify/functions/   Netlify Functions (v2, routed by config.path)
+netlify/functions/   Netlify Functions (v2, routed by config.path). Every file here becomes a function: no tests!
+netlify/tests/       Tests for the functions
 netlify/lib/         Server-only helpers (puzzle lookup from /data)
 src/                 React app
 dev/                 Vite plugin that serves the functions during `npm run dev`
