@@ -1,0 +1,327 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/space-grotesk';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Design tokens. Components only use these semantic names, so each identity
+ * direction (data-brand) and theme (data-theme) is just a different token set.
+ */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-line: var(--line);
+  --color-win: var(--tier-win);
+  --color-close: var(--tier-close);
+  --color-warm: var(--tier-warm);
+  --color-cold: var(--tier-cold);
+  --font-display: var(--display-font);
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --radius-card: var(--card-radius);
+}
+
+:root {
+  /* Tier colors are shared by every direction so share emoji always match. */
+  --tier-win: #178048;
+  --tier-close: #f2b705;
+  --tier-warm: #f07818;
+  --tier-cold: #3f3d48;
+  --tier-ink-win: #ffffff;
+  --tier-ink-close: #2a2100;
+  --tier-ink-warm: #2b1400;
+  --tier-ink-cold: #ffffff;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-theme='dark'] {
+  --tier-win: #2fbf6b;
+  --tier-ink-win: #03200e;
+  --tier-cold: #55525f;
+}
+
+/* ── Direction A · Diner Pop ─────────────────────────────── */
+[data-brand='tomato'] {
+  --bg: #fff5e8;
+  --surface: #ffffff;
+  --surface-2: #ffe8c7;
+  --ink: #22160f;
+  --muted: #6b5546;
+  --primary: #d13a22;
+  --primary-ink: #ffffff;
+  --accent: #ffc53d;
+  --accent-ink: #22160f;
+  --line: #22160f;
+  --display-font: 'Bricolage Grotesque Variable', ui-sans-serif, sans-serif;
+  --display-weight: 800;
+  --display-tracking: -0.03em;
+  --card-radius: 1.5rem;
+  --card-border: 2.5px solid var(--line);
+  --card-shadow: 5px 6px 0 var(--line);
+  --btn-shadow: 3px 4px 0 var(--line);
+  --blob: var(--accent);
+}
+[data-brand='tomato'][data-theme='dark'] {
+  --bg: #1a120e;
+  --surface: #2a1d17;
+  --surface-2: #3b2a20;
+  --ink: #fff1e2;
+  --muted: #c9b29f;
+  --primary: #ff5b3f;
+  --primary-ink: #1a0c07;
+  --line: #000000;
+  --card-border: 2.5px solid #4b3528;
+  --card-shadow: 5px 6px 0 #000000;
+  --btn-shadow: 3px 4px 0 #000000;
+  --blob: #4b3426;
+}
+
+/* ── Direction B · Market Fresh ──────────────────────────── */
+[data-brand='basil'] {
+  --bg: #f4f0e4;
+  --surface: #fffdf7;
+  --surface-2: #e9e3cf;
+  --ink: #14261b;
+  --muted: #56665a;
+  --primary: #1e5b3a;
+  --primary-ink: #f8f5ea;
+  --accent: #b9dd4b;
+  --accent-ink: #14261b;
+  --line: rgb(20 38 27 / 0.14);
+  --display-font: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --display-weight: 700;
+  --display-tracking: -0.02em;
+  --card-radius: 2rem;
+  --card-border: 1px solid var(--line);
+  --card-shadow: 0 1px 2px rgb(20 38 27 / 0.06), 0 12px 32px -8px rgb(20 38 27 / 0.18);
+  --btn-shadow: 0 6px 16px -6px rgb(30 91 58 / 0.55);
+  --blob: #dbe9b4;
+}
+[data-brand='basil'][data-theme='dark'] {
+  --bg: #0f1a14;
+  --surface: #16241c;
+  --surface-2: #1f3127;
+  --ink: #eef2e6;
+  --muted: #9fb2a4;
+  --primary: #8fd16a;
+  --primary-ink: #0f1a14;
+  --accent: #d9f27a;
+  --line: rgb(238 242 230 / 0.12);
+  --card-shadow: 0 12px 32px -8px rgb(0 0 0 / 0.6);
+  --btn-shadow: 0 6px 18px -6px rgb(143 209 106 / 0.45);
+  --blob: #26402f;
+}
+
+/* ── Direction C · Late-Night Snack ──────────────────────── */
+[data-brand='neon'] {
+  --bg: #f5f3ff;
+  --surface: #ffffff;
+  --surface-2: #ece7ff;
+  --ink: #170f33;
+  --muted: #5b5480;
+  --primary: #6236f0;
+  --primary-ink: #ffffff;
+  --accent: #ff6b6b;
+  --accent-ink: #1d0a0a;
+  --line: rgb(23 15 51 / 0.1);
+  --display-font: 'Space Grotesk Variable', ui-sans-serif, sans-serif;
+  --display-weight: 700;
+  --display-tracking: -0.035em;
+  --card-radius: 1.75rem;
+  --card-border: 1px solid var(--line);
+  --card-shadow: 0 20px 50px -20px rgb(98 54 240 / 0.45);
+  --btn-shadow: 0 8px 24px -8px rgb(98 54 240 / 0.7);
+  --blob: linear-gradient(135deg, #ffd6d6, #d9ccff);
+}
+[data-brand='neon'][data-theme='dark'] {
+  --bg: #110a24;
+  --surface: #1b1336;
+  --surface-2: #281e4c;
+  --ink: #f3f0ff;
+  --muted: #aaa2d2;
+  --primary: #a586ff;
+  --primary-ink: #120a26;
+  --accent: #ff7d7d;
+  --line: rgb(243 240 255 / 0.1);
+  --card-shadow: 0 0 0 1px rgb(165 134 255 / 0.25), 0 24px 60px -20px rgb(165 134 255 / 0.5);
+  --btn-shadow: 0 0 24px -4px rgb(165 134 255 / 0.75);
+  --blob: linear-gradient(135deg, #4a2a6b, #2a3a7a);
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+html {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: light;
+}
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease;
+}
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--display-font);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+  }
+  .card {
+    background: var(--surface);
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: var(--card-radius);
+  }
+  .blob {
+    background: var(--blob);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    transition:
+      transform 0.15s var(--ease-out),
+      box-shadow 0.15s var(--ease-out),
+      opacity 0.15s;
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(2px) scale(0.98);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: var(--primary-ink);
+    box-shadow: var(--btn-shadow);
+  }
+  [data-brand='tomato'] .btn-primary {
+    border: 2.5px solid var(--line);
+  }
+  .tier-win {
+    background: var(--tier-win);
+    color: var(--tier-ink-win);
+  }
+  .tier-very-close {
+    background: var(--tier-close);
+    color: var(--tier-ink-close);
+  }
+  .tier-warm {
+    background: var(--tier-warm);
+    color: var(--tier-ink-warm);
+  }
+  .tier-cold {
+    background: var(--tier-cold);
+    color: var(--tier-ink-cold);
+  }
+}
+
+/* ── Motion ───────────────────────────────────────────────── */
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+  }
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  80% {
+    transform: translateX(4px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-7px);
+  }
+  40%,
+  60% {
+    transform: translateX(7px);
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+}
+@keyframes burst {
+  from {
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.animate-row-in {
+  animation: row-in 0.45s var(--ease-spring) both;
+}
+.animate-pop {
+  animation: pop 0.4s var(--ease-spring) both;
+}
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-fade-up {
+  animation: fade-up 0.5s var(--ease-out) both;
+}
+.range-fill {
+  transition:
+    left 0.7s var(--ease-spring),
+    right 0.7s var(--ease-spring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

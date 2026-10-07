@@ -1,0 +1,5 @@
+The JSON files in this folder are a small SAMPLE dataset so the app can run
+before the real prototype data is extracted. Do NOT deploy with these.
+
+Put calorie-guesser.html in the repo root and run:  npm run extract-data
+That overwrites every JSON file here (keeping daily order) and deletes this marker.
