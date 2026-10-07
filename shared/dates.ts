@@ -70,11 +70,12 @@ export function formatCountdown(ms: number): string {
 }
 
 /**
- * Maps a daily puzzle number to an index in a daily list. The list cycles once
- * every entry has been used (puzzle #366 reuses entry 0).
+ * Maps a daily puzzle number to its row in a daily list, or -1 when the list
+ * doesn't reach that day yet. Lists never wrap: new days are added by appending
+ * rows, so a past puzzle never changes.
  */
 export function dailyIndex(n: number, length: number): number {
-  return (((n - 1) % length) + length) % length;
+  return n >= 1 && n <= length ? n - 1 : -1;
 }
 
 /** Past puzzles a player can open for free, given their today. */

@@ -62,9 +62,10 @@ describe('dailyIndex', () => {
     expect(dailyIndex(54, 365)).toBe(53);
     expect(dailyIndex(365, 365)).toBe(364);
   });
-  it('cycles after the list is exhausted', () => {
-    expect(dailyIndex(366, 365)).toBe(0);
-    expect(dailyIndex(731, 365)).toBe(0);
+  it('does not wrap past the end of the list (days are added by appending)', () => {
+    expect(dailyIndex(366, 365)).toBe(-1);
+    expect(dailyIndex(366, 400)).toBe(365);
+    expect(dailyIndex(0, 365)).toBe(-1);
   });
 });
 

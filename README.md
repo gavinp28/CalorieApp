@@ -25,7 +25,10 @@ Preview the identity directions with `?brand=tomato`, `?brand=basil` or `?brand=
 | `plates-bonus.json` | 40 bonus plates |
 | `plate-lib.json` | Plate ingredients: `[food, measure, kcal]` |
 
-Daily puzzle *n* uses row *n − 1* (puzzle #1 = Aug 15, 2026), so **never reorder these files**.
+Daily puzzle *n* uses row *n − 1* (puzzle #1 = Aug 15, 2026), so **never reorder or delete rows**.
+To add more days, append rows to the end of `foods.json` / `plates.json` (plates can reference new
+`plate-lib.json` rows, also appended). Lists never wrap around; every build prints how many days are
+left and warns when fewer than 45 remain. If a list does run out, that day shows a "still cooking" message.
 
 To (re)extract from the prototype: put `calorie-guesser.html` in the repo root and run `npm run extract-data`.
 While `data/SAMPLE_DATA` exists, the data is a small placeholder set and must not be deployed.

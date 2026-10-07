@@ -34,6 +34,17 @@ function FoodGame({ number, today }: { number: number; today: number }) {
   const [announcement, setAnnouncement] = useState('');
 
   if (game.load.state === 'loading') return <Skeleton />;
+  if (game.load.state === 'error' && game.load.code === 'not_found') {
+    return (
+      <div className="card mx-auto max-w-md p-8 text-center">
+        <p className="text-5xl" aria-hidden>
+          🍳
+        </p>
+        <h1 className="font-display mt-3 text-2xl">Today's food is still cooking</h1>
+        <p className="mt-2 text-muted">A fresh puzzle is on its way. Check back soon.</p>
+      </div>
+    );
+  }
   if (game.load.state === 'error') {
     return (
       <div className="card mx-auto max-w-md p-8 text-center">

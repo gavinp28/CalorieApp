@@ -1,4 +1,4 @@
-The JSON files in this folder are a small SAMPLE dataset so the app can run
+The JSON files in this folder are a small SAMPLE dataset (20 foods and 8 plates repeated to fill 365 days) so the app can run
 before the real prototype data is extracted. Do NOT deploy with these.
 
 Put calorie-guesser.html in the repo root and run:  npm run extract-data

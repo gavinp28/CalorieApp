@@ -24,6 +24,12 @@ describe('GET /api/puzzle', () => {
   it('never serves future dailies', () => {
     expect(get('mode=food&kind=daily&n=56').status).toBe(404);
   });
+  it('returns not_found once a daily list runs out, instead of repeating', async () => {
+    const day366 = Date.UTC(2027, 7, 15, 12); // Aug 15 2027 = puzzle #366
+    const res = handlePuzzle(new Request('https://x.test/api/puzzle?mode=food&kind=daily&n=366'), day366);
+    expect(res.status).toBe(404);
+    expect(await res.json()).toEqual({ error: 'not_found' });
+  });
   it('rejects malformed requests', () => {
     expect(get('mode=soup&n=54').status).toBe(400);
     expect(get('mode=food&n=abc').status).toBe(400);
