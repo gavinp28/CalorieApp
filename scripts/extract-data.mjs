@@ -54,7 +54,10 @@ const LIB = evalLiteral('LIB');
 const problems = [];
 const check = (cond, msg) => cond || problems.push(msg);
 
-for (const [label, rows] of [['FOODS', FOODS], ['FOOD_BONUS', FOOD_BONUS]]) {
+for (const [label, rows] of [
+  ['FOODS', FOODS],
+  ['FOOD_BONUS', FOOD_BONUS],
+]) {
   rows.forEach((r, i) =>
     check(
       Array.isArray(r) && r.length === 4 && typeof r[1] === 'string' && typeof r[2] === 'string' && Number.isFinite(r[3]),
@@ -68,7 +71,10 @@ LIB.forEach((r, i) =>
     `LIB[${i}] is not [food, measure, kcal]: ${JSON.stringify(r)}`,
   ),
 );
-for (const [label, rows] of [['PLATES', PLATES], ['PLATE_BONUS', PLATE_BONUS]]) {
+for (const [label, rows] of [
+  ['PLATES', PLATES],
+  ['PLATE_BONUS', PLATE_BONUS],
+]) {
   rows.forEach((r, i) => {
     const ok = Array.isArray(r) && r.length === 3 && Array.isArray(r[2]);
     check(ok, `${label}[${i}] is not [emoji, name, [LIB indexes]]: ${JSON.stringify(r)}`);
@@ -95,6 +101,11 @@ console.log(
   `Extracted FOODS=${FOODS.length} FOOD_BONUS=${FOOD_BONUS.length} PLATES=${PLATES.length} ` +
     `PLATE_BONUS=${PLATE_BONUS.length} LIB=${LIB.length}`,
 );
-for (const [label, n, want] of [['FOODS', FOODS.length, 365], ['FOOD_BONUS', FOOD_BONUS.length, 40], ['PLATES', PLATES.length, 365], ['PLATE_BONUS', PLATE_BONUS.length, 40]]) {
+for (const [label, n, want] of [
+  ['FOODS', FOODS.length, 365],
+  ['FOOD_BONUS', FOOD_BONUS.length, 40],
+  ['PLATES', PLATES.length, 365],
+  ['PLATE_BONUS', PLATE_BONUS.length, 40],
+]) {
   if (n !== want) console.warn(`warning: ${label} has ${n} entries, expected ${want}`);
 }

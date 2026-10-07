@@ -17,7 +17,11 @@ export function FoodCard({ puzzle, eyebrow, shakeKey }: Props) {
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">{eyebrow}</p>
       <div className="relative mx-auto my-5 grid size-36 place-items-center sm:size-44">
         <div className="blob absolute inset-0 rounded-[42%_58%_55%_45%/48%_42%_58%_52%]" aria-hidden />
-        <span className="animate-float relative text-[5.5rem] leading-none drop-shadow-sm sm:text-[6.75rem]" role="img" aria-label={puzzle.name}>
+        <span
+          className="animate-float relative text-[5.5rem] leading-none drop-shadow-sm sm:text-[6.75rem]"
+          role="img"
+          aria-label={puzzle.name}
+        >
           {puzzle.emoji}
         </span>
       </div>

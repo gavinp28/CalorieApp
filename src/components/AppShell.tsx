@@ -8,7 +8,7 @@ import { Wordmark } from './Wordmark';
 const NAV = [
   { to: '/', label: 'Daily', Icon: CalendarIcon, match: (p: string) => p === '/' || p.startsWith('/plate') },
   { to: '/endless', label: 'Endless', Icon: InfinityIcon },
-  { to: '/archive', label: 'Archive', Icon: ArchiveIcon },
+  { to: '/archive', label: 'Archive', Icon: ArchiveIcon, match: (p: string) => p.startsWith('/archive') || p.startsWith('/play') },
   { to: '/stats', label: 'Stats', Icon: StatsIcon },
 ];
 
@@ -22,11 +22,13 @@ interface Props {
 
 export function AppShell({ brand, onBrand, theme, showBrandPicker, children }: Props) {
   const { pathname } = useLocation();
-  const iconBtn =
-    'grid size-11 place-items-center rounded-full text-ink transition hover:bg-surface-2 active:scale-95';
+  const iconBtn = 'grid size-11 place-items-center rounded-full text-ink transition hover:bg-surface-2 active:scale-95';
   return (
     <div className="flex min-h-dvh flex-col overflow-x-clip">
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2"
+      >
         Skip to game
       </a>
 
@@ -113,7 +115,11 @@ function BrandPicker({ brand, onBrand }: { brand: BrandId; onBrand: (b: BrandId)
   return (
     <div className="mb-4 flex flex-col items-center gap-1.5">
       <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted">Preview identity</p>
-      <div role="radiogroup" aria-label="Identity direction preview" className="flex max-w-full gap-0.5 rounded-full border border-dashed border-muted/50 p-1 text-xs font-semibold">
+      <div
+        role="radiogroup"
+        aria-label="Identity direction preview"
+        className="flex max-w-full gap-0.5 rounded-full border border-dashed border-muted/50 p-1 text-xs font-semibold"
+      >
         {(Object.keys(BRANDS) as BrandId[]).map((id, i) => (
           <button
             key={id}
@@ -123,7 +129,8 @@ function BrandPicker({ brand, onBrand }: { brand: BrandId; onBrand: (b: BrandId)
             onClick={() => onBrand(id)}
             className={`whitespace-nowrap rounded-full px-2.5 py-1.5 transition ${brand === id ? 'bg-ink text-bg' : 'text-muted hover:text-ink'}`}
           >
-            <span className="hidden sm:inline">{String.fromCharCode(65 + i)} · </span>{BRANDS[id].name}
+            <span className="hidden sm:inline">{String.fromCharCode(65 + i)} · </span>
+            {BRANDS[id].name}
           </button>
         ))}
       </div>

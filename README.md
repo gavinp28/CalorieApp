@@ -36,6 +36,18 @@ While `data/SAMPLE_DATA` exists, the data is a small placeholder set and must no
 The client never imports `/data`. Puzzles are served by `netlify/functions/puzzle.ts`, which only
 returns today's daily (in any time zone) and the 5 free archive days without an unlock token.
 
+## Routes
+
+| Path | Page |
+| --- | --- |
+| `/`, `/plate` | Today's Single food / Full plate daily |
+| `/archive?mode=plate&view=bonus` | Archive (past days or bonus) per mode |
+| `/play/:mode/:kind/:n` | An archive day or bonus puzzle, e.g. `/play/food/daily/53` |
+| `/stats` | Per-mode stats |
+
+Players' history from the prototype (`calorieguesser:v2` in localStorage, same domain) is imported once on
+first load by `src/lib/migrate.ts`. The prototype's unlock code is not carried over.
+
 ## Layout
 
 ```

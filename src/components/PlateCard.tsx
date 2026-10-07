@@ -31,11 +31,7 @@ export function PlateCard({ puzzle, eyebrow, shakeKey, showKcal }: Props) {
       <h2 className="sr-only">On the plate</h2>
       <ul className="mt-4 divide-y rounded-2xl bg-surface-2 px-4">
         {puzzle.items.map((item, i) => (
-          <li
-            key={i}
-            className="flex items-baseline gap-3 py-2"
-            style={{ borderColor: 'color-mix(in srgb, var(--ink) 9%, transparent)' }}
-          >
+          <li key={i} className="flex items-baseline gap-3 py-2" style={{ borderColor: 'color-mix(in srgb, var(--ink) 9%, transparent)' }}>
             <span className="min-w-0 flex-1">
               <span className="font-semibold leading-snug text-ink">{item.food}</span>{' '}
               <span className="whitespace-nowrap text-sm text-muted">· {item.measure}</span>
@@ -48,9 +44,7 @@ export function PlateCard({ puzzle, eyebrow, shakeKey, showKcal }: Props) {
           </li>
         ))}
       </ul>
-      <p className="mt-3 text-center text-sm font-medium text-muted">
-        {puzzle.items.length} items · guess the total
-      </p>
+      <p className="mt-3 text-center text-sm font-medium text-muted">{puzzle.items.length} items · guess the total</p>
     </section>
   );
 }

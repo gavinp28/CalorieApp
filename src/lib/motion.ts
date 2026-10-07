@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+export const prefersReducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * Animates from 0 to `target` with an ease-out curve, optionally after a delay.

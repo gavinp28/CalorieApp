@@ -12,7 +12,9 @@ function resolve(pref: ThemePref): 'light' | 'dark' {
 export function applyTheme(pref: ThemePref) {
   const theme = resolve(pref);
   document.documentElement.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
 }
 
 export function useTheme() {

@@ -70,3 +70,25 @@ export const CheckIcon = (p: P) => (
     <path d="m5 12.5 4.5 4.5L19 7.5" />
   </svg>
 );
+export const ShareIcon = (p: P) => (
+  <svg {...base(p)} strokeWidth={2.4}>
+    <rect x="8" y="8" width="12" height="12" rx="2.5" />
+    <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+  </svg>
+);
+export const LockIcon = (p: P) => (
+  <svg {...base(p)} strokeWidth={2.4}>
+    <rect x="5" y="10.5" width="14" height="10" rx="2.5" />
+    <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+  </svg>
+);
+export const ChevronLeft = (p: P) => (
+  <svg {...base(p)} strokeWidth={2.5}>
+    <path d="m14.5 6-6 6 6 6" />
+  </svg>
+);
+export const XIcon = (p: P) => (
+  <svg {...base(p)} strokeWidth={3}>
+    <path d="M7 7l10 10M17 7 7 17" />
+  </svg>
+);

@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import { formatCountdown, msUntilNextLocalMidnight } from '../../shared/dates';
 import type { GameStatus } from '../../shared/grading';
+import type { Stats } from '../../shared/stats';
 import type { Mode } from '../../shared/types';
 import { useCountUp } from '../lib/motion';
-import { useNow } from '../lib/useToday';
 import { Confetti } from './Confetti';
+import { ShareIcon } from './Icons';
 
 interface Props {
   mode: Mode;
@@ -16,15 +16,20 @@ interface Props {
   justFinished: boolean;
   /** Wait this long before counting up the answer (lets the plate breakdown play first). */
   countDelayMs?: number;
+  onShare: () => void;
+  /** Shown for today's daily. */
+  stats?: Stats;
   /** Extra content above the answer, e.g. the plate breakdown. */
   children?: ReactNode;
+  /** Countdown for today's daily, navigation for archive puzzles. */
+  footer: ReactNode;
 }
 
 const WIN_TITLES = ['Bullseye!', 'Sharp!', 'Nicely done!', 'Close call!', 'Phew, just in time!'];
 
-export function ResultPanel({ mode, status, answer, guessCount, closest, justFinished, countDelayMs = 0, children }: Props) {
+export function ResultPanel(props: Props) {
+  const { mode, status, answer, guessCount, closest, justFinished, countDelayMs = 0, onShare, stats, children, footer } = props;
   const shown = useCountUp(answer, 1200, justFinished, countDelayMs);
-  const now = useNow();
   const won = status === 'won';
   const counted = shown === answer;
 
@@ -49,12 +54,29 @@ export function ResultPanel({ mode, status, answer, guessCount, closest, justFin
           Your closest guess was <strong className="text-ink">{closest.toLocaleString()}</strong>.
         </p>
       )}
-      <div className="mt-6 rounded-2xl bg-surface-2 px-4 py-3">
-        <p className="text-sm font-semibold text-muted">Next {mode === 'plate' ? 'plate' : 'food'} in</p>
-        <p className="font-display text-3xl tabular-nums text-ink" role="timer" aria-label="Time until the next puzzle">
-          {formatCountdown(msUntilNextLocalMidnight(now))}
-        </p>
-      </div>
+
+      <button type="button" onClick={onShare} className="btn btn-primary mt-6 h-14 w-full text-lg">
+        <ShareIcon className="size-5" />
+        Share result
+      </button>
+
+      {stats && (
+        <dl className="mt-5 grid grid-cols-4 gap-2">
+          {[
+            [stats.played, 'Played'],
+            [`${stats.winPct}%`, 'Win'],
+            [stats.streak, 'Streak'],
+            [stats.best, 'Best'],
+          ].map(([v, label]) => (
+            <div key={label} className="flex flex-col-reverse">
+              <dt className="text-xs font-semibold text-muted">{label}</dt>
+              <dd className="font-display text-2xl tabular-nums text-ink">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
+      <div className="mt-5">{footer}</div>
     </section>
   );
 }

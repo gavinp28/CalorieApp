@@ -17,7 +17,10 @@ export interface GameResult {
   number: number;
   won: boolean;
   guesses: number[];
-  answer: number;
+  /** Missing on results imported from the prototype. */
+  answer?: number;
+  emoji?: string;
+  name?: string;
   /** True when a daily was finished on its own day (counts toward streaks). */
   onTheDay: boolean;
   finishedAt: string;
@@ -25,10 +28,7 @@ export interface GameResult {
 
 export const resultsKey = (mode: Mode) => `results:${mode}`;
 
-export type GameLoad =
-  | { state: 'loading' }
-  | { state: 'error'; code: PuzzleErrorCode }
-  | { state: 'ready'; puzzle: Puzzle };
+export type GameLoad = { state: 'loading' } | { state: 'error'; code: PuzzleErrorCode } | { state: 'ready'; puzzle: Puzzle };
 
 export function useGame(mode: Mode, kind: PuzzleKind, number: number, today: number) {
   const id = puzzleId(mode, kind, number);
@@ -74,6 +74,8 @@ export function useGame(mode: Mode, kind: PuzzleKind, number: number, today: num
             won: after === 'won',
             guesses: next,
             answer: puzzle.kcal,
+            emoji: puzzle.emoji,
+            name: puzzle.name,
             onTheDay: kind === 'daily' && number === today,
             finishedAt: new Date().toISOString(),
           };

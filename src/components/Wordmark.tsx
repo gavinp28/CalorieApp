@@ -8,7 +8,14 @@ function Mark({ brand }: { brand: BrandId }) {
       <svg viewBox="0 0 40 40" className="size-9" aria-hidden>
         <rect x="1.5" y="1.5" width="37" height="37" rx="11" fill="var(--primary)" stroke="var(--line)" strokeWidth="2.5" />
         <circle cx="20" cy="20" r="10.5" fill="var(--accent)" stroke="var(--line)" strokeWidth="2.5" />
-        <path d="M16.5 24.5v-9m-3 3 3-3 3 3M23.5 15.5v9m-3-3 3 3 3-3" fill="none" stroke="var(--line)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M16.5 24.5v-9m-3 3 3-3 3 3M23.5 15.5v9m-3-3 3 3 3-3"
+          fill="none"
+          stroke="var(--line)"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     );
   }
@@ -18,7 +25,14 @@ function Mark({ brand }: { brand: BrandId }) {
       <svg viewBox="0 0 40 40" className="size-9" aria-hidden>
         <circle cx="20" cy="20" r="18" fill="var(--primary)" />
         <circle cx="20" cy="20" r="12.5" fill="none" stroke="var(--primary-ink)" strokeOpacity=".35" strokeWidth="1.5" />
-        <path d="M9 25.5h4.5l4-7h5l4 7H31" fill="none" stroke="var(--accent)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M9 25.5h4.5l4-7h5l4 7H31"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     );
   }

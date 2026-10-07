@@ -24,12 +24,16 @@ export function getPuzzle(mode: Mode, kind: PuzzleKind, number: number): Puzzle 
   if (!Number.isInteger(number) || number < 1) return null;
   const id = puzzleId(mode, kind, number);
   if (mode === 'food') {
-    const row = kind === 'daily' ? FOODS[dailyIndex(number, FOODS.length)] as FoodRow | undefined : (FOOD_BONUS[number - 1] as FoodRow | undefined);
+    const row =
+      kind === 'daily' ? (FOODS[dailyIndex(number, FOODS.length)] as FoodRow | undefined) : (FOOD_BONUS[number - 1] as FoodRow | undefined);
     if (!row) return null;
     const [emoji, name, serving, kcal] = row;
     return { id, mode, kind, number, emoji, name, serving, kcal };
   }
-  const row = kind === 'daily' ? PLATES[dailyIndex(number, PLATES.length)] as PlateRow | undefined : (PLATE_BONUS[number - 1] as PlateRow | undefined);
+  const row =
+    kind === 'daily'
+      ? (PLATES[dailyIndex(number, PLATES.length)] as PlateRow | undefined)
+      : (PLATE_BONUS[number - 1] as PlateRow | undefined);
   if (!row) return null;
   const [emoji, name, indexes] = row;
   const items = indexes.map((i) => {
