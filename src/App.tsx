@@ -8,6 +8,8 @@ import { ToastProvider } from './components/Toast';
 import { ArchivePage } from './pages/ArchivePage';
 import { DailyPage } from './pages/DailyPage';
 import { PlayPage } from './pages/PlayPage';
+import { RestorePage } from './pages/RestorePage';
+import { UnlockPage } from './pages/UnlockPage';
 import { StatsPage } from './pages/StatsPage';
 
 // Direction A is chosen for now. The others stay previewable with ?brand=basil / ?brand=neon.
@@ -37,6 +39,8 @@ export function App() {
             <Route path="/archive" element={<ArchivePage />} />
             <Route path="/play/:mode/:kind/:n" element={<PlayPage />} />
             <Route path="/stats" element={<StatsPage />} />
+            <Route path="/unlock" element={<UnlockPage />} />
+            <Route path="/restore" element={<RestorePage />} />
             <Route
               path="*"
               element={

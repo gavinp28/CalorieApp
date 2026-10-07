@@ -34,7 +34,8 @@ To (re)extract from the prototype: put `calorie-guesser.html` in the repo root a
 While `data/SAMPLE_DATA` exists, the data is a small placeholder set and must not be deployed.
 
 The client never imports `/data`. Puzzles are served by `netlify/functions/puzzle.ts`, which only
-returns today's daily (in any time zone) and the 5 free archive days without an unlock token.
+returns today's daily (in any time zone) and the 5 free archive days without an unlock token;
+everything else requires a valid signed token.
 
 ## Routes
 
@@ -44,6 +45,15 @@ returns today's daily (in any time zone) and the 5 free archive days without an 
 | `/archive?mode=plate&view=bonus` | Archive (past days or bonus) per mode |
 | `/play/:mode/:kind/:n` | An archive day or bonus puzzle, e.g. `/play/food/daily/53` |
 | `/stats` | Per-mode stats |
+| `/unlock?session_id=…` | Where Stripe returns buyers; verifies and unlocks |
+| `/restore` | Restore by email, or with a personal restore link |
+
+## Payments
+
+One $3.99 Stripe payment unlocks the archive and bonus puzzles in both modes. No database: Stripe holds
+the purchase history, and the server issues HMAC-signed unlock tokens. Setup steps for Stripe, Netlify
+environment variables and Resend are in [docs/PAYMENTS-SETUP.md](docs/PAYMENTS-SETUP.md). For local
+development, copy `.env.example` to `.env` and fill in **test** values.
 
 Players' history from the prototype (`calorieguesser:v2` in localStorage, same domain) is imported once on
 first load by `src/lib/migrate.ts`. The prototype's unlock code is not carried over.

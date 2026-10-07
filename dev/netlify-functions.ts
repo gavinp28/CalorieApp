@@ -8,6 +8,9 @@ import type { Plugin, ViteDevServer } from 'vite';
  */
 const FUNCTIONS: Record<string, string> = {
   '/api/puzzle': '/netlify/functions/puzzle.ts',
+  '/api/unlock': '/netlify/functions/unlock.ts',
+  '/api/restore-email': '/netlify/functions/restore-email.ts',
+  '/api/restore-link': '/netlify/functions/restore-link.ts',
 };
 
 async function toRequest(req: IncomingMessage): Promise<Request> {

@@ -7,7 +7,7 @@ import { Countdown } from '../components/Countdown';
 import { BONUS_COUNT, playPath } from '../components/GameView';
 import { CheckIcon, LockIcon, XIcon } from '../components/Icons';
 import { UnlockSheet } from '../components/UnlockSheet';
-import { PRICE, useUnlockToken } from '../lib/entitlement';
+import { PRICE, useUnlock } from '../lib/entitlement';
 import { load } from '../lib/storage';
 import type { GameResult } from '../lib/useGame';
 import { useResults } from '../lib/useStats';
@@ -25,7 +25,8 @@ export function ArchivePage() {
   const mode: Mode = params.get('mode') === 'plate' ? 'plate' : 'food';
   const view: View = params.get('view') === 'bonus' ? 'bonus' : 'days';
   const today = useToday();
-  const unlocked = !!useUnlockToken();
+  const unlock = useUnlock();
+  const unlocked = !!unlock;
   const results = useResults(mode);
   const [sheet, setSheet] = useState(false);
 
